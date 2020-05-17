@@ -1,0 +1,308 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+    background-color: black;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* CUSTOM CSS STARTS */
+
+html {
+    font-family: Open sans, Arial, sans-serif;
+}
+
+.h1, h1 {
+    font-size: 30px;
+}
+
+canvas{
+        border: thin solid white;
+      }
+
+.jumbotron {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    background-color: black;
+}
+
+.card {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    height: 300px;
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.card:hover {
+    background-color: #161414;
+    color: white;
+}
+
+h3 {
+    text-decoration: underline;
+    padding-bottom: 10px;
+}
+
+p {
+    padding-bottom: 10px;
+}
+
+.title-two {
+    font-size: 4vh;
+    line-height: 6vh;
+    color: white;
+    padding-bottom: 30px;
+    padding-top: 70px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+.title {
+    color: white;
+    position: absolute;
+    bottom: 15vh;
+    left: 19vw;
+}
+
+.btn-light {
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    box-shadow: 5px 5px #D3D3D3;
+}
+
+.click {
+    position: absolute;
+    right: 55vh;
+}
+
+.ctrl {
+    position: absolute;
+    right: 39vh;
+}
+
+.backspace {
+    position: absolute;
+    right: 16vh;
+}
+
+@media only screen and (min-width: 768px) {
+    .press {
+        position: absolute;
+        right: 60vh;
+    }
+
+    .spacebar {
+        position: absolute;
+        right: 35vh;
+    }
+
+    .ex {
+        position: absolute;
+        right: 16vh;
+    }
+}
+
+.row {
+    padding-bottom: 100px;
+}
+
+.img-container2 {
+    position: relative;
+    padding-left: 10%;
+    padding-right: 80%;
+}
+
+.img-container {
+    position: relative;
+    padding-left: 80%;
+    padding-right: 5%;
+}
+
+img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotating {
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    -webkit-animation: rotating 8s linear infinite;
+    -moz-animation: rotating 8s linear infinite;
+    -ms-animation: rotating 8s linear infinite;
+    -o-animation: rotating 8s linear infinite;
+    animation: rotating 8s linear infinite;
+}

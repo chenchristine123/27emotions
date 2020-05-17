@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>27 Emotions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- p5.js starts here -->
+<script>
+    // drawing functions
+    var smile;
+    var sad;
+    var hearts;
+    var numb;
+    var wow;
+    let emojiArray; // for random selection 
+    let onCanvasEmoji = [];
+    
+    // helper functions 
+    function chooseRandomEmoji(givenArray) {
+        let randomEmoji = random(givenArray);
+        console.log(randomEmoji);
+        return randomEmoji;
+    }
+
+    // Randomize array 
+    function shuffleArray(array) {
+        let emojis = array.map(x => x.emoji);
+        
+        for (let i = emojis.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
+        }
+
+        for (let i = 0; i < array.length; i++) {
+            array[i].emoji = emojis[i];
+        }
+    }
+
+    // canvas drawing functions 
+    function setup(){
+        var canvas = createCanvas(400, 600);
+        canvas.parent('sketch-div');
+        background(0);
+        
+        let s = '[click] to add emoji, [ctrl] to shuffle, [backspace] to clear';
+        let t = 'THE EMOTION BOX';
+        noFill();
+        stroke(255);
+        textSize(40);
+        text(t, 10, 10, 100, 300);
+        
+        fill(255);
+        noStroke();
+        strokeWeight(0.005);
+        textSize(12);
+        text(s, 10, 160, 120, 100);
+    }
+
+    function draw() {
+        
+        for (let i = 0; i < onCanvasEmoji.length; i++) {
+            onCanvasEmoji[i].show();
+        }   
+    }
+    
+    function mousePressed() {  
+        let emojiArray = ["numb", "happy", "wow", "moon"];
+        let chosenEmoji = chooseRandomEmoji(emojiArray)
+        let newEmoji = new Emoji(mouseX, mouseY, chosenEmoji)
+        onCanvasEmoji.push(newEmoji);
+    }
+    
+   function keyPressed() {
+     if (keyCode === CONTROL) {
+        console.log("original", onCanvasEmoji)
+        shuffleArray(onCanvasEmoji);
+        console.log("shuffled", onCanvasEmoji)
+
+     } else if (keyCode === BACKSPACE) {
+        onCanvasEmoji = [];
+        clear();
+        console.log("deleting emojis", onCanvasEmoji)
+     } else {
+        console.log("other", onCanvasEmoji)
+     }
+    }
+
+    class Emoji {
+        constructor (x, y, emoji) {
+            this.x = x 
+            this.y = y
+            this.emoji = emoji
+        }
+
+        show() {
+            if (this.emoji == "happy") {
+                fill(255);
+                stroke(0);
+                ellipseMode(CENTER);
+                strokeWeight(1);
+                ellipse(this.x, this.y, 70, 70);
+                fill(0);
+                ellipse(this.x-12, this.y-10, 8, 10);
+                fill(0);
+                ellipse(this.x+12, this.y-10, 8, 10);
+                fill(0);
+                ellipse(this.x, this.y+12, 30, 30);
+                rectMode(CENTER);
+                noStroke();
+                fill(255);
+                rect(this.x, this.y+4.1, 40, 16);
+
+            } else if (this.emoji == "wow") {
+                fill(255);
+                stroke(0);
+                ellipseMode(CENTER);
+                strokeWeight(1);
+                ellipse(this.x, this.y, 70, 70);
+                fill(0);
+                ellipse(this.x-12, this.y-10, 8, 10);
+                fill(0);
+                ellipse(this.x+12, this.y-10, 8, 10);
+                fill(0);
+                ellipse(this.x, this.y+12, 12, 12);
+
+            } else if (this.emoji == "numb") {
+                fill(255);
+                stroke(0);
+                ellipseMode(CENTER);
+                strokeWeight(1);
+                ellipse(this.x, this.y, 70, 70);
+                fill(0);
+                ellipse(this.x-12, this.y-10, 8, 10);
+                fill(0);
+                ellipse(this.x+12, this.y-10, 8, 10);
+                rectMode(CENTER);
+                fill(0);
+                rect(this.x, this.y+8, 30, 2);
+                
+            } else if (this.emoji == "moon") {
+                fill("yellow");
+                stroke(0);
+                ellipseMode(CENTER);
+                strokeWeight(1);
+                ellipse(this.x, this.y, 70, 70);
+                fill(0);
+                ellipse(this.x+20, this.y, 70, 70);
+            }
+        }
+    }
+
+    
+</script>
+
+<body>
+
+    <script>
+        function showCard(test, number) {
+            var x = document.getElementsByClassName("def")[number];
+            var container = document.getElementsByClassName("container")[0];
+            var div = x.parentElement;
+            if (x.style.display == "none") {
+                x.style.display = "block";
+
+                div.style.color = "black";
+                div.style.backgroundColor = "white";
+
+                var cards = document.getElementsByClassName("card");
+                var defs = document.getElementsByClassName("def");
+                for (i = 0; i < cards.length; i++) {
+                    if (i != number) {
+                        defs[i].style.display = "none";
+                        cards[i].removeAttribute("style");
+                    }
+                }
+
+            } else {
+                x.style.display = "none";
+                div.removeAttribute("style");
+                var cards = document.getElementsByClassName("card");
+                var defs = document.getElementsByClassName("def");
+                for (i = 0; i < cards.length; i++) {
+                    defs[i].style.display = "none";
+                    cards[i].removeAttribute("style");
+                }
+            }
+        }
+    </script>
+    
+
+    <div class="jumbotron text-center">
+       <button type="button" class="click btn btn-light">&nbsp;&nbsp;CLICK&nbsp;&nbsp;</button>
+        <button type="button" class="ctrl btn btn-light">&nbsp;&nbsp;CTRL&nbsp;&nbsp;</button>
+        <button type="button" class="backspace btn btn-light">&nbsp;&nbsp;BACKSPACE&nbsp;&nbsp;</button>
+        
+        <div id="sketch-div"></div>
+        
+        <div class="row">
+            <div class="img-container2">
+                <img class="rotating" src="images/circletext.png">
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h1 class="title-two col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">Emotions guide our perspectives, feelings, and actions. New study finds that human beings possess a total of 27 different emotions.Understanding these emotions can help us better understand the feelings beneath our decision. </h1>
+        </div>
+
+        <div class="row">
+            <div class="img-container">
+                <img class="rotating" src="images/circletext.png" alt="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 0)">
+                <h3>01</h3>
+                <p>admiration</p>
+                <p class="def" style="display: none;">respect and warm approval
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_sAe2rv.json"  background="transparent"  speed="1"  style="width: 160px; height: 160px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 1)">
+                <h3>02</h3>
+                <p>adoration</p>
+                <p class="def" style="display: none;">deep love and respect
+                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_wJmcka.json"  background="transparent"  speed="1"  style="width: 160px; height: 160px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 2)">
+                <h3>03</h3>
+                <p>aesthetic appreciation</p>
+                <p class="def" style="display: none;">admiration of beauty and arts
+                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_uWvfWb.json"  background="transparent"  speed="0.8"  style="width: 160px; height: 160px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 3)">
+                <h3>04</h3>
+                <p>amusement</p>
+                <p class="def" style="display: none;">the state or experience of finding something funny
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_1sIA0w.json"  speed="0.6"  style="width: 160px; height: 160px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 4)">
+                <h3>05</h3>
+                <p>anxiety</p>
+                <p class="def" style="display: none;">a feeling of worry, nervousness, or unease
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_kU9gJI.json"  speed="0.9"  style="width: 160px; height: 160px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 5)">
+                <h3>06</h3>
+                <p>awe</p>
+                <p class="def" style="display: none;">a feeling of reverential respect mixed with fear or wonder
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_BSuATQ.json"  speed="1"  style="width: 130px; height: 130px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 6)">
+                <h3>07</h3>
+                <p>awkwardness</p>
+                <p class="def" style="display: none;">the quality of being in an uncomfortable situation
+                    <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_epkfcr.json"  speed="0.9"  style="width: 150px; height: 150px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 7)">
+                <h3>08</h3>
+                <p>boredom</p>
+                <p class="def" style="display: none;">a state of lack of interest
+                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_5Is8qZ.json"  speed="1.1"  style="width: 130px; height: 130px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 8)">
+                <h3>09</h3>
+                <p>calmness</p>
+                <p class="def" style="display: none;">the quality of being free from agitation or strong emotion
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_nY0xNj.json"  speed="0.7"  style="width: 130px; height: 130px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 9)">
+                <h3>10</h3>
+                <p>confusion</p>
+                <p class="def" style="display: none;">the state of being bewildered or unclear in one's mind about something
+                    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_Fpvuat.json"  speed="0.7"  style="width: 130px; height: 130px;"  loop controls autoplay></lottie-player>
+                    
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 10)">
+                <h3>11</h3>
+                <p>craving</p>
+                <p class="def" style="display: none;">a powerful desire for something
+                    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_UrHj68.json"  speed="0.7"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 11)">
+                <h3>12</h3>
+                <p>disgust</p>
+                <p class="def" style="display: none;">a feeling of revulsion aroused by something unpleasant 
+                    <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_P7b18O.json"  speed="0.7"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 12)">
+                <h3>13</h3>
+                <p>empathetic pain</p>
+                <p class="def" style="display: none;">the state of understanding and relating to another person's pain
+                    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_6yCI1h.json"  speed="0.7"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 13)">
+                <h3>14</h3>
+                <p>entrancement</p>
+                <p class="def" style="display: none;">a feeling of delight at being filled with wonder
+                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_RrSlLo.json"  speed="0.7"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 14)">
+                <h3>15</h3>
+                <p>envy</p>
+                <p class="def" style="display: none;"> feeling of discontent aroused by someone else's possessions 
+                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_d6F5mc.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 15)">
+                <h3>16</h3>
+                <p>excitement</p>
+                <p class="def" style="display: none;">a feeling of great enthusiasm and eagerness
+                    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_ZpaRwy.json"  speed="1.2"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 16)">
+                <h3>17</h3>
+                <p>fear</p>
+                <p class="def" style="display: none;">an unpleasant emotion caused by the belief that something is dangerous
+                    <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_LJ7HjO.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 17)">
+                <h3>18</h3>
+                <p>horror</p>
+                <p class="def" style="display: none;">an intense feeling of fear
+                    <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_AVPJVv.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 18)">
+                <h3>19</h3>
+                <p>interest</p>
+                <p class="def" style="display: none;">the state of wanting to know or learn about something or someone
+                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_vSCudP.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+
+            </div>
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 19)">
+                <h3>20</h3>
+                <p>joy</p>
+                <p class="def" style="display: none;">a feeling of great pleasure and happiness
+                    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_2bpLBy.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 20)">
+                <h3>21</h3>
+                <p>nostalgia</p>
+                <p class="def" style="display: none;">a sentimental longing or wistful affection for the past
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_6CwUxG.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 21)">
+                <h3>22</h3>
+                <p>romance</p>
+                <p class="def" style="display: none;">a feeling of excitement and mystery associated with love
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_Y5r92p.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 22)">
+                <h3>23</h3>
+                <p>sadness</p>
+                <p class="def" style="display: none;">the quality of being unhappy
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_qPNrNw.json"  speed="0.8"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 23)">
+                <h3>24</h3>
+                <p>satisfaction</p>
+                <p class="def" style="display: none;">feelings derived from fulfillment of one's wishes, or needs
+                    <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_A72PAu.json"  speed="0.8"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-2 col-xs-8 col-xs-offset-2" onclick="showCard(this, 24)">
+                <h3>25</h3>
+                <p>sexual desire</p>
+                <p class="def" style="display: none;">a desire for sexual intimacy
+                    <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_cySoz2.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 25)">
+                <h3>26</h3>
+                <p>sympathy</p>
+                <p class="def" style="display: none;">feelings of pity and sorrow for someone else's misfortune
+                    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_lXM4yh.json"  speed="1"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+            
+            <div class="card col-md-2 col-md-offset-1 col-xs-8 col-xs-offset-2" onclick="showCard(this, 26)">
+                <h3>27</h3>
+                <p>triumph</p>
+                <p class="def" style="display: none;">a great victory
+                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_D7j4ru.json"  speed="0.7"  style="width: 140px; height: 140px;"  loop controls autoplay></lottie-player>
+                </p>
+            </div>
+        </div>
+    </div>
+</body></html>
